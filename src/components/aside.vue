@@ -17,7 +17,7 @@
         <el-aside width="200px" style="position: absolute;top:50px;left:0;bottom:0; overflow: auto; background:#545c64;">
             <!--:default-openeds="['1', '3'] 表示 1 3 展开   default-active="2"-->
             <el-menu :default-openeds="arrOpen"
-                     default-active="1"
+                     :default-active="active"
                      background-color="#545c64"
                      text-color="#fff"
                      active-text-color="#ffd04b"
@@ -127,15 +127,27 @@
                 default: ['1']
             }
         },
+        data(){
+            return{
+                active:'1'
+            }
+        },
         mounted(){
             document.title=this.$route.name;
             var title=document.getElementById('title');
             console.log(title)
+            this.Bus.$on('active',(active)=>{
+                this.active=active
+            })
         },
         //时时改变标题
         watch:{
             '$route':function(){
                 document.title=this.$route.name;
+            },
+            'active'(a){
+                alert(a)
+                this.active=a
             }
         }
     }

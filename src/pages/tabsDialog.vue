@@ -1,59 +1,66 @@
 <template>
-    <el-tabs v-model="current" @tab-click="handleClick">
-        <el-tab-pane label="用户管理" name="1" v-if="show===1 || show===0">
-            <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
-                <el-button type="text">1</el-button>
-            </el-tooltip>
+    <div>
+        <el-tabs v-model="current" @tab-click="handleClick">
+            <el-tab-pane label="用户管理" name="1" v-if="show===1 || show===0">
+                <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
+                    <el-button type="text">1</el-button>
+                </el-tooltip>
 
-            <el-popover
-                placement="top-start"
-                title="标题"
-                width="100%"
-                trigger="hover"
-            >
-                <el-table :data="gridData">
-                    <el-table-column :render-header="viewHeader"  width="150" property="date" label="日期"></el-table-column>
-                    <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                    <el-table-column width="300" property="address" label="地址"></el-table-column>
-                </el-table>
-                <el-button slot="reference">hover 激活</el-button>
-            </el-popover>
+                <el-popover
+                    placement="top-start"
+                    title="标题"
+                    width="100%"
+                    trigger="hover"
+                >
+                    <el-table :data="gridData">
+                        <el-table-column :render-header="viewHeader"  width="150" property="date" label="日期"></el-table-column>
+                        <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                        <el-table-column width="300" property="address" label="地址"></el-table-column>
+                    </el-table>
+                    <el-button slot="reference">hover 激活</el-button>
+                </el-popover>
 
-        </el-tab-pane>
-        <el-tab-pane label="配置管理" name="2" v-if="show===2 || show===0">
-            <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
-                <el-button type="text">2</el-button>
-            </el-tooltip>
+            </el-tab-pane>
+            <el-tab-pane label="配置管理" name="2" v-if="show===2 || show===0">
+                <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
+                    <el-button type="text">2</el-button>
+                </el-tooltip>
 
-            <el-dropdown @command="handleCommand">
+                <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">
                         <span>{{command}}</span>
                       <i class="el-icon-arrow-down el-icon--right"></i>
                   </span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-                    <el-dropdown-item command="b">狮子头</el-dropdown-item>
-                    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-                    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
-                    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
-        </el-tab-pane>
-        <el-tab-pane label="角色管理" name="3" v-if="show===3 || show===0">
-            <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
-                <el-button type="text">3</el-button>
-            </el-tooltip>
-        </el-tab-pane>
-        <el-tab-pane label="定时任务补偿" name="4" v-if="show===4 || show===0">
-            <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
-                <el-button type="text">4</el-button>
-            </el-tooltip>
-        </el-tab-pane>
-    </el-tabs>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+                        <el-dropdown-item command="b">狮子头</el-dropdown-item>
+                        <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+                        <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+                        <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-tab-pane>
+            <el-tab-pane label="角色管理" name="3" v-if="show===3 || show===0">
+                <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
+                    <el-button type="text">3</el-button>
+                </el-tooltip>
+            </el-tab-pane>
+            <el-tab-pane label="定时任务补偿" name="4" v-if="show===4 || show===0">
+                <el-tooltip class="item" effect="dark" content="Bottom Center 提示文字" placement="bottom">
+                    <el-button type="text">4</el-button>
+                </el-tooltip>
+            </el-tab-pane>
+        </el-tabs>
+        <step></step>
+    </div>
+
 </template>
 <script type="text/jsx">
+    import step from "../step/step.vue"
     export default{
-
+        components:{
+            step
+        },
         data(){
             return {
                 current: '1',

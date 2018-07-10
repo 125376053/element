@@ -7,7 +7,7 @@
         </el-tabs>
 
         <div class="top" v-if="!addFlag && !addFlag2">
-            <select v-model="sheng" name=""  style="width:150px;height:38px;border:1px solid #ddd;">
+            <select v-model="sheng" name="" style="width:150px;height:38px;border:1px solid #ddd;">
                 <option>北京市</option>
                 <option>天津市</option>
                 <option>长沙市</option>
@@ -52,7 +52,8 @@
                 </el-table-column>
             </el-table>
 
-            <el-pagination style="margin-top:10px;" :current-page.sync="pageNo" layout="prev, pager, next" :total="500" @current-change="changePage">
+            <el-pagination style="margin-top:10px;" :current-page.sync="pageNo" layout="prev, pager, next" :total="500"
+                           @current-change="changePage">
 
             </el-pagination>
         </div>
@@ -153,30 +154,37 @@
 
         </div>
 
+
+        <step></step>
+
     </div>
 </template>
 <script>
+    import step from "../step/step.vue"
     export default {
+        components: {
+            step
+        },
         data() {
             return {
-                activeName:0,
+                activeName: 0,
                 cityInfo: '',
-                tabList:[],
-                pageNo:1,
-                tab:this.$route.query.tab||0,
-                page:this.$route.query.page||1,
-                page0:1,
-                page1:1,
-                area_id:this.$route.query.area_id||1,
-                sheng:this.$route.query.sheng||'',
-                city:this.$route.query.city||'',
-                block:this.$route.query.block||'',
-                removeDialog:false,
-                removeIndex:0,
-                editeDialog:false,
-                editeText:'',
-                lookDialog:false,
-                obj:'',
+                tabList: [],
+                pageNo: 1,
+                tab: this.$route.query.tab || 0,
+                page: this.$route.query.page || 1,
+                page0: 1,
+                page1: 1,
+                area_id: this.$route.query.area_id || 1,
+                sheng: this.$route.query.sheng || '',
+                city: this.$route.query.city || '',
+                block: this.$route.query.block || '',
+                removeDialog: false,
+                removeIndex: 0,
+                editeDialog: false,
+                editeText: '',
+                lookDialog: false,
+                obj: '',
 
                 options: [{
                     value: '选项1',
@@ -195,81 +203,81 @@
                     label: '北京烤鸭'
                 }],
                 value: '',
-                addFlag:false,
-                addFlag2:false,
-                schoolName:'',
-                schoolMa:'',
-                schoolTel:'',
-                selected:''
+                addFlag: false,
+                addFlag2: false,
+                schoolName: '',
+                schoolMa: '',
+                schoolTel: '',
+                selected: ''
             }
         },
         methods: {
             search(){
-                this.page=1;
-                this.pageNo=parseInt(this.page);
+                this.page = 1;
+                this.pageNo = parseInt(this.page);
                 //查询的时候 永远查询的是第一页 不应该从分页 的第四页开始查询
-                console.log('page-----------'+this.page);
-                console.log('tab-----------'+this.tab);
-                console.log('sheng----------'+this.sheng);
-                console.log('shi------------'+this.city);
-                console.log('block----------'+this.block);
+                console.log('page-----------' + this.page);
+                console.log('tab-----------' + this.tab);
+                console.log('sheng----------' + this.sheng);
+                console.log('shi------------' + this.city);
+                console.log('block----------' + this.block);
 
                 this.$router.push({
-                    path:'/areaSchool',
-                    query:{
-                        page:this.page,
-                        tab:this.tab,
-                        sheng:this.sheng,
-                        city:this.city,
-                        block:this.block
+                    path: '/areaSchool',
+                    query: {
+                        page: this.page,
+                        tab: this.tab,
+                        sheng: this.sheng,
+                        city: this.city,
+                        block: this.block
                     }
                 })
 
             },
             handleClick(tab, event){
 
-                this.addFlag=false;
+                this.addFlag = false;
 
                 //省市县清空
-                this.sheng="";
-                this.city="";
-                this.block="";
+                this.sheng = "";
+                this.city = "";
+                this.block = "";
 
-                if(tab.index==0){
-                    this.area_id=1;
-                    this.tab=0;
-                    this.page=this.page0;
-                    this.pageNo=this.page0; //修改分页样式 标记当前第几页
-                    this.activeName='0';//修改tab样式 标记是哪个选中
-                }else{
-                    this.area_id=44;
-                    this.tab=1;
-                    this.page=this.page1;
-                    this.pageNo=this.page1;
-                    this.activeName='1';
+                if (tab.index == 0) {
+                    this.area_id = 1;
+                    this.tab = 0;
+                    this.page = this.page0;
+                    this.pageNo = this.page0; //修改分页样式 标记当前第几页
+                    this.activeName = '0';//修改tab样式 标记是哪个选中
+                } else {
+                    this.area_id = 44;
+                    this.tab = 1;
+                    this.page = this.page1;
+                    this.pageNo = this.page1;
+                    this.activeName = '1';
                 }
 
-                console.log('page================'+this.page)
-                console.log('page0================'+this.page0)
-                console.log('page1================'+this.page1)
+                console.log('page================' + this.page)
+                console.log('page0================' + this.page0)
+                console.log('page1================' + this.page1)
 
                 this.tableView({
-                    area_id:this.area_id,
-                    tab:this.tab,
+                    area_id: this.area_id,
+                    tab: this.tab,
                     //page:this.page,//这里为啥不传page1,page2
-                    page:this.tab>0?this.page2:this.page1,
-                    brand_id:'',
-                    category_id:''
+                    page: this.tab > 0 ? this.page2 : this.page1,
+                    brand_id: '',
+                    category_id: ''
                 })
 
                 this.$router.push({
-                    path:'/areaSchool',
-                    query:{
-                        page:this.page,
-                        tab:this.tab,
-                        sheng:this.sheng,
-                        city:this.city,
-                        block:this.block
+                    path: '/areaSchool',
+                    query: {
+                        page: this.page,
+                        tab: this.tab,
+                        sheng: this.sheng,
+                        city: this.city,
+                        block: this.block
                         //area_id:this.area_id
                     }
                 })
@@ -278,16 +286,16 @@
             //请求数据 渲染表格
             tableView(obj){
                 this.$http.get(this.baseUrl + '/api/production/list', {
-                //this.$http.get('/api/production/list', {
+                    //this.$http.get('/api/production/list', {
                     params: {
-                        area_id:obj.area_id,
-                        tab:obj.tab,
-                        page:obj.page,
-                        brand_id:'',
-                        category_id:''
+                        area_id: obj.area_id,
+                        tab: obj.tab,
+                        page: obj.page,
+                        brand_id: '',
+                        category_id: ''
                     }
                 }).then((d) => {
-                    this.tabList=d.data.data.data;
+                    this.tabList = d.data.data.data;
 
                     //不要设置路由 会执行2次
 
@@ -297,75 +305,75 @@
             changePage(page){
 
                 //tab之间共享分页 要记录各自的分页 用this.tab表示tab索引来区别page是哪个
-                this['page'+this.tab]=page;//===this.page0,this.page1
+                this['page' + this.tab] = page;//===this.page0,this.page1
 
-                console.log('page0:'+this.page0,'page1:'+this.page1)
+                console.log('page0:' + this.page0, 'page1:' + this.page1)
 
                 this.tableView({
-                    area_id:this.area_id,
-                    tab:this.tab,
-                    page:this['page'+this.tab],//tab=0 page0=1 ; tab=1 page1=1
-                    brand_id:'',
-                    category_id:''
+                    area_id: this.area_id,
+                    tab: this.tab,
+                    page: this['page' + this.tab],//tab=0 page0=1 ; tab=1 page1=1
+                    brand_id: '',
+                    category_id: ''
                 })
 
                 this.$router.replace({
-                    path:'/areaSchool',
-                    query:{
-                        page:this['page'+this.tab],
-                        tab:this.tab,
-                        sheng:this.sheng,
-                        city:this.city,
-                        block:this.block
+                    path: '/areaSchool',
+                    query: {
+                        page: this['page' + this.tab],
+                        tab: this.tab,
+                        sheng: this.sheng,
+                        city: this.city,
+                        block: this.block
                         //area_id:this.area_id
                     }
                 })
             },
             remove(index){
-                this.removeIndex=index;
-                this.removeDialog=true;
+                this.removeIndex = index;
+                this.removeDialog = true;
             },
             remove2(){
-                this.tabList.splice(this.removeIndex,1);
-                this.removeDialog=false;
+                this.tabList.splice(this.removeIndex, 1);
+                this.removeDialog = false;
             },
             edite(index){
-                this.removeIndex=index;
-                this.editeText=this.tabList[index].product_name;
-                this.editeDialog=true;
+                this.removeIndex = index;
+                this.editeText = this.tabList[index].product_name;
+                this.editeDialog = true;
             },
             edite2(){
                 console.log(this.editeText)
-                this.tabList[this.removeIndex].product_name=this.editeText;
-                this.editeDialog=false;
+                this.tabList[this.removeIndex].product_name = this.editeText;
+                this.editeDialog = false;
             },
             look(row){
-                this.obj=row;
-                this.lookDialog=true;
+                this.obj = row;
+                this.lookDialog = true;
             },
             look2(){
                 console.log(this.obj)
-                this.lookDialog=false;
+                this.lookDialog = false;
             },
             save(){
-                let createSchool={
-                    product_name:this.value,
-                    id:this.schoolName,
-                    id:this.schoolTel,
-                    id:this.schoolMa
+                let createSchool = {
+                    product_name: this.value,
+                    id: this.schoolName,
+                    id: this.schoolTel,
+                    id: this.schoolMa
                 };
-                this.addFlag=!this.addFlag;
+                this.addFlag = !this.addFlag;
                 console.log(createSchool)
                 this.tabList.unshift(createSchool);
             },
             save2(){
-                let createSchool={
-                    product_name:this.value,
-                    id:this.schoolName,
-                    id:this.schoolTel,
-                    id:this.schoolMa
+                let createSchool = {
+                    product_name: this.value,
+                    id: this.schoolName,
+                    id: this.schoolTel,
+                    id: this.schoolMa
                 };
-                this.addFlag2=!this.addFlag2;
+                this.addFlag2 = !this.addFlag2;
                 console.log(createSchool)
                 this.tabList.unshift(createSchool);
             }
@@ -374,24 +382,24 @@
 
             console.log(this.tabList)
 
-            this.pageNo=parseInt(this.page);
+            this.pageNo = parseInt(this.page);
 
-            this.activeName=this.tab;
+            this.activeName = this.tab;
 
             this.tableView({
-                area_id:this.area_id,
-                page:this.page,
-                tab:this.tab
+                area_id: this.area_id,
+                page: this.page,
+                tab: this.tab
             });
 
             this.$router.replace({
-                path:'/areaSchool',
-                query:{
-                    page:this.page,
-                    tab:this.tab,
-                    sheng:this.sheng,
-                    city:this.city,
-                    block:this.block
+                path: '/areaSchool',
+                query: {
+                    page: this.page,
+                    tab: this.tab,
+                    sheng: this.sheng,
+                    city: this.city,
+                    block: this.block
                     //area_id:this.area_id
                 }
             })
