@@ -51,8 +51,24 @@
         data(){
             return{
                 labelPosition: 'right',
-                tabPosition:'top'
+                tabPosition:'top',
+                test:0
             }
+        },
+        methods:{
+            /*haha(){
+                setTimeout(()=>{
+                    this.test=1
+                },2000)
+            },
+            hehe(){
+                console.log(this.test);
+            }*/
+        },
+        async mounted(){
+            //await this.haha()
+            //await this.hehe()
+
         }
     }
 </script>

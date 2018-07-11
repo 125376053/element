@@ -23,11 +23,10 @@
             One6
         },
         mounted(){
-            alert(this.Step)
-            console.log(this.cur);
             this.Bus.$on('step',(step)=>{
                 this.Step=step;
                 this.cur=this.stepArr[this.Step]
+                alert(this.Step)
             })
         }
     }
