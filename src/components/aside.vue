@@ -5,10 +5,13 @@
                 <!--flex和响应式有冲突 flex表示不换行 但是小屏幕时要求换行 于是没换行-->
                 <!--:span表示所有屏幕下12分-->
                 <!--xs表示只有手机屏幕下沾满一行-->
-                <el-col :span="12">
+                <el-col :span="8">
                     <p>用户管理系统</p>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="8">
+                    <el-button :span="8" @click="startTiyan">我要体验</el-button>
+                </el-col>
+                <el-col :span="8">
                     <p style="text-align: right;">用户所属的机构/学校名称</p>
                 </el-col>
             </el-row>
@@ -145,9 +148,19 @@
             '$route':function(){
                 document.title=this.$route.name;
             },
+
+            //改变选中的导航
             'active'(a){
-                alert(a)
                 this.active=a
+            }
+        },
+        methods:{
+            //点击开始体验
+            startTiyan(){
+                //如果已经绑定微信 直接体验
+                let start=false //false 没有绑定微信
+                let step=true //true 显示步骤
+                this.Bus.$emit('start',start,step)
             }
         }
     }

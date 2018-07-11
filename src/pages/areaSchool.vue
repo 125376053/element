@@ -27,7 +27,7 @@
 
             <el-input style="width:400px" placeholder="请输入关键字查询"></el-input>
 
-            <el-button @click="search">查询</el-button>
+            <el-button ref="search1" @click="search">查询</el-button>
         </div>
 
         <div style="text-align: right;margin:20px 0 10px;">
@@ -185,7 +185,6 @@
                 editeText: '',
                 lookDialog: false,
                 obj: '',
-
                 options: [{
                     value: '选项1',
                     label: '黄金糕'
@@ -208,7 +207,7 @@
                 schoolName: '',
                 schoolMa: '',
                 schoolTel: '',
-                selected: ''
+                selected: '',
             }
         },
         methods: {
@@ -232,7 +231,6 @@
                         block: this.block
                     }
                 })
-
             },
             handleClick(tab, event){
 
@@ -379,6 +377,13 @@
             }
         },
         mounted(){
+
+            //getBoundingClientRect
+            //eventBus监控不到值 是因为v-if创建的组件没有加载 用父级监控 再props传递过去
+            this.Bus.$emit('eleInfor', this.$refs.search1.$el.getBoundingClientRect())
+            window.addEventListener('resize', () => {
+                this.Bus.$emit('eleInfor', this.$refs.search1.$el.getBoundingClientRect())
+            })
 
             console.log(this.tabList)
 
