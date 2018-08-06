@@ -24,7 +24,7 @@
                 this.Bus.$emit('step',this.Step)
                 this.Bus.$emit('active','3')
                 this.$router.push({
-                    path:'/tabsDialog',
+                    path:'/weChatRed/applicationManageRed',
                     query:{
                         step:this.Step
                     }

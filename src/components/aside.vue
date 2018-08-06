@@ -139,6 +139,8 @@
             document.title=this.$route.name;
             var title=document.getElementById('title');
             console.log(title)
+
+
             this.Bus.$on('active',(active)=>{
                 this.active=active
             })
