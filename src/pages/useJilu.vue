@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-upload
-            :action="this.baseUrl+'/api/uploadFileId'"
+            :action="'/api/uploadFileId'"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             multiple
@@ -86,7 +86,7 @@
                 formData.append('file', $event.file);//第一张图片
                 this.$http({
                     method: 'post',
-                    url: 'http://waterapi.qijiatech.com/api/Common/UploadFile?ticket=BF96EE57B93DE820E69F18217919EB8914128F7B38E82C12DB0FF84BA598E9237011785C5A768CA59D8E918580E5EBADB7C2466578C25A5F37C7FA0500151132163C8CE61E849B6725CCA15184499B4486FE8509C0AECC111F038FD6450471E2F78E4442B41EB31DB71CC3AFA141D7D74F0546014D9766CD8FDAA48DB32047464146A7DD4C03029014FE7E3610B2534C7D8226AA54CA722C94468FC7A5D3616BDC359D756A99D69CE63F358B5895E26F',
+                    url: '',
                     data: formData,
                     headers: {'Content-Type': 'multipart/form-data'},
                     onUploadProgress(progressEvent){

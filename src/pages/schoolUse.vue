@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <pre>
             vue城市选择器插件
             1 安装

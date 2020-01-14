@@ -1,0 +1,38 @@
+1 store,router 在实例化之前已经可以使用了
+2 addRouters根据条件 拆分不同的路由段 默认返回不需要拆分的路由 最后拼接路由
+3 随机选路由
+
+import router from "./router/index"
+import {wang,zhang} from "./router/index"
+
+addRouter()
+
+function addRouter(){
+    // 售卖
+    const serverData=[1,2,3]
+    // 管理员
+    let admin=[8,9,10]
+
+    let ad=[]
+    serverData.forEach((index)=>{
+        ad.push(wang[index])
+    })
+    admin.forEach((index)=>{
+        ad.push(zhang[index])
+    })
+    console.log(ad);
+    let obj={}
+    let ad2=[]
+    ad.forEach((item)=>{
+        if(!obj[item.path]){
+            ad2.push(item)
+            console.log(obj);
+            obj[item.path]=1
+        }
+    })
+    console.log(ad);
+    console.log(ad2);
+    router.options.routes=router.options.routes.concat(ad2)
+    console.log(router.options.routes);
+    router.addRoutes(ad)
+}

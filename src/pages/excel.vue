@@ -43,23 +43,23 @@
 
 
         <el-table
-                :data="tableData"
-                style="width: 100%">
-                <el-table-column :show-overflow-tooltip="true"
-                    prop="date"
-                    label="日期"
-                    width="180">
-                </el-table-column>
-                <el-table-column :show-overflow-tooltip="true"
-                    prop="name"
-                    label="姓名"
-                    width="180">
-                </el-table-column>
-                <el-table-column :show-overflow-tooltip="true"
-                    prop="address"
-                    label="地址">
-                </el-table-column>
-            </el-table>
+            :data="tableData"
+            style="width: 100%">
+            <el-table-column :show-overflow-tooltip="true"
+                             prop="date"
+                             label="日期"
+                             width="180">
+            </el-table-column>
+            <el-table-column :show-overflow-tooltip="true"
+                             prop="name"
+                             label="姓名"
+                             width="180">
+            </el-table-column>
+            <el-table-column :show-overflow-tooltip="true"
+                             prop="address"
+                             label="地址">
+            </el-table-column>
+        </el-table>
     </div>
 </template>
 <script>
@@ -102,7 +102,6 @@
             formatJson(filterVal, jsonData) {
                 return jsonData.map(v => filterVal.map(j => v[j]))
             },
-
             uploadExcel($event){
                 let formData = new FormData();
                 formData.append('file', $event.file);//第一张图片
@@ -120,13 +119,10 @@
                 }).then(function (response) {
                     console.log(response);
                 }).catch(function (error) {
-
                 })
             }
-
         }
     }
 </script>
 <style>
-
 </style>
